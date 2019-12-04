@@ -1,0 +1,107 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-2 offset-md-2">
+      <div class="container pt-3"><h1>User info</h1></div> 
+      <p id="notice"><%= notice %></p>                 
+        <table class="table">
+          <tr><th><%= attachment_image_tag @book.user, :profile_image, :fill, 70, 70, format: 'jpg', fallback: "no_image.jpg" %></th></tr>
+          <tr><th><div class="container">
+            <p>name</p>
+            <%= @book.user.name %></div></th></tr>
+          <tr><th><div class="container">
+            <p>introduction</p>
+            <%= @book.user.introduction %></div></th></tr>
+          <tr><th><button type="button" class="btn btn-outline-primary"><%= link_to 'EDIT', edit_user_path(current_user) %></button></th></tr>
+        </table>
+      <div class="container"><h2>New book</h2></div>
+      
+      
+      <%= form_for(@book) do |form| %>
+        <% if @book.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved: successfully</h2>
+            <ul>
+            <% @book.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+      
+        <p id="notice"><%= notice %></p>
+      
+        
+        <table class="table">
+          <tr>
+          <div class="field">
+          <th><%= form.label :Title %></th>
+          <th><%= form.text_field :title %></th>
+          </div>
+          </tr>
+          <tr>
+        <div class="field">
+          <th><%= form.label :Opinion %></th>
+          <th><%= form.text_area :body %></th>
+        </div>
+          </tr>
+          <tr>
+          <div class="actions">
+        <% if @user == @current_user %>
+          <div class="actions">
+          <th><%= form.submit "Create Book" %></th>
+          </div>
+          <% else %>
+          <tr><th><button type="button" class="btn btn-outline-primary"><%= link_to 'Create Book', books_path(@book) %></button></th></tr>
+        <% end %>
+        </tr>
+        </table>
+      <% end %>
+
+
+
+    </div>
+    <div class="col-6">
+      <div class="container pt-4"><h2>Book detail<h2></div>
+      <%= form_for(@book) do |form| %>
+        <% if @book.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
+            <ul>
+            <% @book.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+      <% end %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Opinion</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="container">
+            <%= link_to attachment_image_tag(@book.user, :profile_image, :fill, 75, 75, format: 'jpg', fallback: "no_image.jpg"), user_path(@book) %>
+          </div><%= link_to @book.user.name, user_path(@books) %></td>
+            <td><%= link_to @book.title, book_path(@book) %></td>
+            <td><%= @book.body %></td>
+          <% if @book.user == current_user %>
+            <td>
+              <%= link_to 'Edit', edit_book_path(@book) %>
+              <%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+          <% end %>
+          <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="offset-md-2"></div>
+
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/f81ed11e59.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+  <div classa="container">
+    <% if user_signed_in? %> 
+    <!-- ユーザーがログインしていた時の処理 -->
+      <ul class="nav navbar-dark bg-dark justify-content-end">
+      <div class="container-fluid">
+        <div class="row">
+        <div class="col-2 offset-md-2"><li class="nav-item p-1"><h2 class="h2">Bookers<h2></li></div>
+
+        <div class="offset-md-2"></div>
+
+            <div class="col-1">
+            <li class="nav-item p-2">
+              <button type="button" class="btn btn-outline-primary"><i class="fas fa-archway"></i><%= link_to "Home", user_path(current_user.id) %></button></li>
+              </div>
+              <div class="col-1">
+            <li class="nav-item p-2">
+              <button type="button" class="btn btn-outline-primary"><i class="fas fa-align-left"></i><%= link_to "Users", users_path %></button></li>
+              </div>
+              <div class="col-1">
+            <li class="nav-item p-2">
+              <button type="button" class="btn btn-outline-primary"><i class="fab fa-buffer"></i><%= link_to "Books", books_path %></li>
+              </div>
+              <div class="col-1">
+            <li class="nav-item p-2 mr-4">
+              <button type="button" class="btn btn-outline-primary"><i class="fas fa-caret-square-down"></i><%= link_to "logout", destroy_user_session_path, method: :delete %></button></li>
+              </div>
+              <div class="offset-md-2"></div>
+              
+        </div>
+      </div>
+      </ul>
+    <div>
+    <p id="notice"><%= notice %></p>
+  <% else %>
+  
+    <!-- ユーザーがログインしていなかった時の処理 -->
+    <div classa="container">
+      <ul class="nav navbar-dark bg-dark justify-content-end">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-2 offset-md-2"><li class="nav-item p-1"><h2 class="h2">Bookers<h2></li></div>
+
+          <div class="offset-md-2"></div>
+
+          <div class="col-1">
+            <li class="nav-item p-2"> 
+              <button type="button" class="btn btn-outline-primary"><i class="fas fa-archway"></i><%= link_to "Home", root_path %></button></li>
+              </div>
+              <div class="col-1">
+            <li class="nav-item p-2">
+              <button type="button" class="btn btn-outline-primary"><i class="fas fa-align-left"></i><%= link_to "About", home_path %></button></li>
+              </div>
+              <div class="col-1">
+            <li class="nav-item p-2">
+              <button type="button" class="btn btn-outline-primary"><i class="far fa-address-card"></i><%= link_to "sign up", new_user_registration_path %></button></li>
+              </div>
+              <div class="col-1">
+            <li class="nav-item p-2 mr-4">
+              <button type="button" class="btn btn-outline-primary"><i class="far fa-check-square"></i><%= link_to "login", new_user_session_path %></button></li>
+              </div>
+
+              <div class="offset-md-2"></div>
+             
+        </div>
+      </div>
+      </ul>
+    <div> 
+    <p id="notice"><%= notice %></p>
+  <% end %>
+      <%= yield %>
+      
+    <div class="container">
+      <p>CopyRight Infratop.inc<p>
+    </div>
+  </body>
+</html>

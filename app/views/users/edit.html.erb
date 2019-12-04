@@ -1,0 +1,40 @@
+  
+  <diV class="container pt-3"><h1>User info</h1><div>
+
+  <%= form_for(@user) do |form| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this book from being saved:</h2>
+        <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <% end %>
+  <p id="notice"><%= notice %></p>
+
+<div class="container">
+<%= form_for(@user) do |form| %> 
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>    
+  </div>
+
+  <div>Image</div>
+
+  <div>
+    <%= form.attachment_field :profile_image %>
+  </div>
+
+  <div>
+    <%= form.label :introduction %>
+    <%= form.text_area :introduction %>
+  </div>
+
+  <div>
+    <%= form.submit "Update" %>
+  </div>
+<% end %>
+</div
